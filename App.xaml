@@ -1,0 +1,59 @@
+﻿<Application x:Class="CatsCalculator.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:CatsCalculator"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <SolidColorBrush x:Key="TextInputColor" Color="#222"></SolidColorBrush>
+        <SolidColorBrush x:Key="ButtonBackgroundColor_Normal" Color="#ff8888ee"></SolidColorBrush>
+        <Color x:Key="ButtonBackgroundColor_Hover">#ffaaaaff</Color>
+        <Color x:Key="ButtonBackgroundColor_Pressed">#ff6666cc</Color>
+        <Color x:Key="ButtonBackgroundColor_Disabled">#ff6666cc</Color>
+        <SolidColorBrush x:Key="ColoredText" Color="#ff222266"></SolidColorBrush>
+
+        <Style x:Key="ButtonStyle_Main" TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}">
+            <Setter Property="OverridesDefaultStyle" Value="True"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="ButtonContainer" BorderThickness="0" Padding="8,0" Margin="0" CornerRadius="3" Background="{DynamicResource ButtonBackgroundColor_Normal}">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualStateGroup.Transitions>
+                                        <VisualTransition GeneratedDuration="0:0:0.2" />
+                                        <VisualTransition GeneratedDuration="0" To="Pressed" />
+                                    </VisualStateGroup.Transitions>
+                                    <VisualState x:Name="Normal" />
+                                    <VisualState x:Name="MouseOver">
+                                        <Storyboard>
+                                            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
+                                                Storyboard.TargetName="ButtonContainer">
+                                                <EasingColorKeyFrame KeyTime="0" Value="{DynamicResource ButtonBackgroundColor_Hover}" />
+                                            </ColorAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Pressed">
+                                        <Storyboard>
+                                            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
+                                                Storyboard.TargetName="ButtonContainer">
+                                                <EasingColorKeyFrame KeyTime="0" Value="{DynamicResource ButtonBackgroundColor_Pressed}" />
+                                            </ColorAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <Grid>
+                                <ContentPresenter HorizontalAlignment="Center"
+                           VerticalAlignment="Center" Name="content"/>
+                            </Grid>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="OverridesDefaultStyle" Value="True"/>
+            <Setter Property="FontFamily" Value="Segoe UI Semibold"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+    </Application.Resources>
+</Application>
