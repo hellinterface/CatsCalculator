@@ -24,42 +24,25 @@ namespace CatsCalculator
         Number NumberMemory = new Number(0, 0);
         Operation currentOperation = null;
 
-        // событие нажатия на кнопку клавиатуры
         void MainWindow_KeyDown(object sender, KeyEventArgs e)
         {
+            int i;
+            if (int.TryParse(((char)(e.Key)).ToString(), out i))
+            {
+                AddDigitToEnd(i);
+            }
             switch (e.Key)
             {
-                case Key.Divide: SetCurrentOperation(new OperDivide()); break;
-                case Key.Multiply: SetCurrentOperation(new OperMultiply()); break;
-                case Key.Subtract: SetCurrentOperation(new OperMinus()); break;
-                case Key.Add: SetCurrentOperation(new OperPlus()); break;
-
-                case Key.D0: AddDigitToEnd(0); break;
-                case Key.D1: AddDigitToEnd(1); break;
-                case Key.D2: AddDigitToEnd(2); break;
-                case Key.D3: AddDigitToEnd(3); break;
-                case Key.D4: AddDigitToEnd(4); break;
-                case Key.D5: AddDigitToEnd(5); break;
-                case Key.D6: AddDigitToEnd(6); break;
-                case Key.D7: AddDigitToEnd(7); break;
-                case Key.D8: AddDigitToEnd(8); break;
-                case Key.D9: AddDigitToEnd(9); break;
-
-                case Key.NumPad0: AddDigitToEnd(0); break;
-                case Key.NumPad1: AddDigitToEnd(1); break;
-                case Key.NumPad2: AddDigitToEnd(2); break;
-                case Key.NumPad3: AddDigitToEnd(3); break;
-                case Key.NumPad4: AddDigitToEnd(4); break;
-                case Key.NumPad5: AddDigitToEnd(5); break;
-                case Key.NumPad6: AddDigitToEnd(6); break;
-                case Key.NumPad7: AddDigitToEnd(7); break;
-                case Key.NumPad8: AddDigitToEnd(8); break;
-                case Key.NumPad9: AddDigitToEnd(9); break;
-
+                case Key.OemComma: AppendPoint(); break;
                 case Key.Delete: ClearAll(); break;
                 case Key.Back: RemoveDigitFromEnd(); break;
                 case Key.Enter: Execute(); break;
-                case Key.OemComma: AppendPoint(); break;
+
+                case Key.Add: SetCurrentOperation(new OperPlus()); break;
+                case Key.Subtract: SetCurrentOperation(new OperMinus()); break;
+                case Key.Multiply: SetCurrentOperation(new OperMultiply()); break;
+                case Key.Divide: SetCurrentOperation(new OperDivide()); break;
+
                 default: break;
             }
         }
@@ -75,10 +58,7 @@ namespace CatsCalculator
                 NumberMain.AddDigitToEnd(digit);
                 UpdateMainNumber(NumberMain);
             }
-            catch
-            {
-
-            }
+            catch { }
         }
         public void RemoveDigitFromEnd()
         {
