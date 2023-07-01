@@ -89,7 +89,7 @@ namespace CatsCalculator
         {
             Label_Main.Content = str;
         }
-        public void UpdateScreen(string str = null)
+        public void UpdateScreen()
         {
             Label_Main.Content = NumberMain.Normal;
             string tempString = NumberSecond.Normal.ToString();
